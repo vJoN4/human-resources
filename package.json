@@ -1,0 +1,21 @@
+{
+  "name": "human-resources-emp",
+  "version": "1.0.0",
+  "description": "API using express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "node",
+    "express",
+    "learning",
+    "project"
+  ],
+  "author": "Jonathan Jesús Herrera López",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
