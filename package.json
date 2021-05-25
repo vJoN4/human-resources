@@ -4,7 +4,12 @@
   "description": "API using express.js",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vJoN4/human-resources.git"
   },
   "keywords": [
     "api",
@@ -15,7 +20,15 @@
   ],
   "author": "Jonathan Jesús Herrera López",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vJoN4/human-resources/issues"
+  },
+  "homepage": "https://github.com/vJoN4/human-resources/#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7"
   }
 }
