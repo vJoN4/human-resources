@@ -10,7 +10,6 @@ const handleBlankFields = (keys=[], request) => {
   return {notBlankFields, blankFields};
 };
 
-const fieldsToReview = (bodyLength, blankFields, numFields) => (bodyLength == numFields) ? numFields - blankFields : (blankFields) ? blankFields + numFields - bodyLength : numFields - bodyLength;
-
+const fieldsToReview = (bodyLength, blankFields, numFields) => (bodyLength === numFields) ? (numFields === blankFields) ? numFields : blankFields : (numFields - bodyLength)  + blankFields;
 
 module.exports = { handleBlankFields, fieldsToReview };
