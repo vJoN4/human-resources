@@ -26,21 +26,32 @@ employees.post("/", async (request, response, next) => {
       response.status( affectedRows ? 201 : 500 ).json( affectedRows ? 
       { code: 201, message: "Empleado insertado correctamente" } : { code: 500, message: "Ha ocurrido un error"});
     } catch (e) {
-      response.status(400).json({code: 400, message: e.sqlMessage});
+      response.status(200).json({code: 400, message: e.sqlMessage});
     }
   }
   else {
-    response.status(400).json({ code:400, message: `Falta(n) ${functions.fieldsToReview(bodyReqLength, blankFields, 5) } campo(s) para insertar correctamente el registro`})
+    response.status(200).json({ code:400, message: `Falta(n) ${functions.fieldsToReview(bodyReqLength, blankFields, 5) } campo(s) para insertar correctamente el registro`})
   }
 });
 
-//DELETING EMPLOYEES --> 5 REQUIRED FIELDS
-employees.delete("/", async (request, response, next) => {
-  //VERIFICAR QUE EXISTA DICHO USUARIO
-  const query = `DELETE FROM employees WHERE id = '${request.body.id}'`;
-  let { affectedRows } = await db.query(query);
-  response.status( affectedRows ? 200 : 404 ).json( affectedRows ? 
-  { code: 200, message: "Empleado eliminado correctamente" } : { code: 404, message: "Empleado no encontrado"});
+//DELETING EMPLOYEES --> 1 REQUIRED FIELD
+employees.delete("/:id", async (request, response, next) => {
+  const id = request.params.id;
+  if (id) {
+    let verification = await db.query(`SELECT * FROM employees WHERE id = '${id}'`);
+    const query = `DELETE FROM employees WHERE id = '${id}'`;
+    if(verification.length){
+      let { affectedRows } = await db.query(query);
+      response.status( affectedRows ? 200 : 404 ).json( affectedRows ? 
+      { code: 200, message: "Empleado eliminado correctamente" } : { code: 404, message: "Empleado no encontrado"});  
+    }
+    else {
+      response.status(200).json({code: 404, message: "Empleado no encontrado"});
+    }
+  }
+  else{
+    response.status(200).json({code: 400, message: "Request vacio"});
+  }
 });
 
 //UPDATING ALL THE EMPLOYEE RECORD
