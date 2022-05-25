@@ -34,6 +34,21 @@ employees.post("/", async (request, response, next) => {
   }
 });
 
+// GETTING EMPLOUYEES BY ID
+employees.get("/:id", async (request, response, next) => {
+  const id = request.params.id;
+  if (id) {
+    let employee = await db.query(`SELECT * FROM employees WHERE id = '${id}'`);
+
+    if (Object.keys(employee).length) {
+      response.status(200).json({ code: 200, message: employee });
+    } else {
+      response.status(200).json({ code: 404, message: 'Empleado no encontrado' });
+    }
+  }
+});
+
+
 //DELETING EMPLOYEES --> 1 REQUIRED FIELD
 employees.delete("/:id", async (request, response, next) => {
   const id = request.params.id;
